@@ -402,9 +402,123 @@ ul { list-style: none; }
 
 .project-card:hover .card-tag { background: rgba(0,0,0,0.07); }
 
+/* ===== Card Actions — right-side vertical panel ===== */
 .card-actions {
     display: flex;
-    gap: 10px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 24px 28px;
+    border-left: 1px solid var(--border-subtle);
+    flex-shrink: 0;
+    min-width: 106px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Subtle inner highlight on the actions panel */
+.card-actions::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg,
+            rgba(255,255,255,0.15) 0%,
+            transparent 40%,
+            transparent 60%,
+            rgba(0,0,0,0.02) 100%);
+    pointer-events: none;
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+
+/* Action buttons — larger & more prominent */
+.card-actions .btn-outline {
+    flex-direction: column;
+    padding: 14px 20px;
+    font-size: 13px;
+    font-weight: 600;
+    gap: 7px;
+    border-radius: 12px;
+    letter-spacing: 0.05em;
+    width: 90px;
+    text-align: center;
+    background: rgba(0,0,0,0.08);
+    border: 1px solid rgba(0,0,0,0.18);
+    color: var(--text-primary);
+    transition: all 0.28s cubic-bezier(0.25, 0.8, 0.25, 1.2);
+}
+
+.card-actions .btn-outline::before {
+    width: 22px;
+    height: 22px;
+    opacity: 0.55;
+    transition: opacity 0.28s, transform 0.28s;
+}
+
+.card-actions .btn-outline:hover {
+    background: rgba(0,0,0,0.14);
+    border-color: rgba(0,0,0,0.35);
+    color: var(--text-primary);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+}
+
+.card-actions .btn-outline:hover::before {
+    opacity: 0.85;
+    transform: scale(1.08);
+}
+
+.card-actions .btn-outline:active {
+    transform: translateY(-1px) scale(0.96);
+    background: rgba(0,0,0,0.18);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+    transition: all 0.06s ease;
+}
+
+/* Disabled state inside actions panel */
+.card-actions .btn-outline:disabled {
+    opacity: 0.3;
+    cursor: default;
+    pointer-events: none;
+    background: rgba(0,0,0,0.04);
+}
+
+/* ===== Button highlight flash animation ===== */
+@keyframes btn-flash {
+    0%, 100% {
+        background: rgba(0,0,0,0.08);
+        border-color: rgba(0,0,0,0.18);
+        box-shadow: none;
+        transform: translateY(0);
+    }
+    20% {
+        background: rgba(0,0,0,0.18);
+        border-color: rgba(0,0,0,0.50);
+        box-shadow: 0 0 18px rgba(0,0,0,0.18);
+        transform: translateY(-4px);
+    }
+    40% {
+        background: rgba(0,0,0,0.08);
+        border-color: rgba(0,0,0,0.18);
+        box-shadow: none;
+        transform: translateY(0);
+    }
+    60% {
+        background: rgba(0,0,0,0.18);
+        border-color: rgba(0,0,0,0.50);
+        box-shadow: 0 0 18px rgba(0,0,0,0.18);
+        transform: translateY(-4px);
+    }
+    80% {
+        background: rgba(0,0,0,0.08);
+        border-color: rgba(0,0,0,0.18);
+        box-shadow: none;
+        transform: translateY(0);
+    }
+}
+
+.card-actions .btn-outline.flash {
+    animation: btn-flash 0.9s ease-in-out;
 }
 
 .btn-outline {
@@ -504,6 +618,30 @@ ul { list-style: none; }
 
     .project-card { flex-direction: column; }
     .card-thumb { width: 100%; min-height: 180px; }
+
+    /* Actions become horizontal row on mobile */
+    .card-actions {
+        flex-direction: row;
+        gap: 12px;
+        padding: 16px 24px 20px;
+        border-left: none;
+        border-top: 1px solid var(--border-subtle);
+        min-width: unset;
+        justify-content: center;
+    }
+    .card-actions::before { display: none; }
+    .card-actions .btn-outline {
+        flex-direction: row;
+        padding: 10px 18px;
+        font-size: 12px;
+        gap: 6px;
+        border-radius: 10px;
+        width: auto;
+    }
+    .card-actions .btn-outline::before {
+        width: 16px;
+        height: 16px;
+    }
 
     .main { padding: 40px 20px 60px; }
     .header-inner { padding: 0 20px; }

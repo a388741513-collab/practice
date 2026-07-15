@@ -106,14 +106,30 @@
                 <div class="card-tags">
                     ${p.tags.map(t => `<span class="card-tag">${t}</span>`).join('')}
                 </div>
-                <div class="card-actions">
-                    ${cardButton(p.protoUrl, 'btn-prototype', '原型图')}
-                    ${cardButton(p.docUrl, 'btn-doc', 'PRD')}
-                </div>
+            </div>
+            <div class="card-actions">
+                ${cardButton(p.protoUrl, 'btn-prototype', '原型图')}
+                ${cardButton(p.docUrl, 'btn-doc', 'PRD')}
             </div>
         `;
         return article;
     });
 
     cards.forEach(c => grid.appendChild(c));
+
+    /* ===== Card click → button flash ===== */
+    grid.addEventListener('click', (e) => {
+        // Don't flash if the click is on a button itself — let the link work
+        if (e.target.closest('.card-actions .btn-outline')) return;
+
+        const card = e.target.closest('.project-card');
+        if (!card) return;
+
+        const btns = card.querySelectorAll('.card-actions .btn-outline');
+        btns.forEach(btn => {
+            btn.classList.remove('flash');
+            void btn.offsetWidth; // force reflow to restart animation
+            btn.classList.add('flash');
+        });
+    });
 })();
