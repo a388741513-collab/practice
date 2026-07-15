@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>L-Practice archive-作品集</title>
+    <meta name="description" content="个人作品集 — 产品原型与需求文档">
+    <meta name="theme-color" content="#ececf0">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- SVG grain filter for metallic texture -->
+    <svg style="position:fixed;width:0;height:0;pointer-events:none;" aria-hidden="true">
+        <defs>
+            <filter id="metal-grain" x="0" y="0" width="100%" height="100%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="4" stitchTiles="stitch" result="noise" />
+                <feColorMatrix type="saturate" values="0" in="noise" result="gray" />
+                <feComponentTransfer in="gray" result="grain">
+                    <feFuncA type="linear" slope="0.06" />
+                </feComponentTransfer>
+                <feBlend mode="overlay" in="grain" in2="SourceGraphic" />
+            </filter>
+        </defs>
+    </svg>
+
+    <!-- ===== Header / Navigation ===== -->
+    <header class="header">
+        <div class="header-inner">
+            <a href="#" class="logo">L<span>—Practice Archive</span></a>
+            <nav>
+                <button class="menu-toggle" aria-label="Toggle menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+                    <span></span><span></span><span></span>
+                </button>
+                <ul class="nav-links">
+                    <li><a href="#works">作品</a></li>
+                    <li><a href="#contact">联系我</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ===== Main Content ===== -->
+    <main class="main">
+
+        <!-- Page Title -->
+        <section class="page-head">
+            <h1>个人作品集</h1>
+
+            <!-- Typewriter -->
+            <div class="typewriter-stage">
+                <span class="typewriter-text" id="typewriter"></span>
+                <span class="typewriter-cursor"></span>
+            </div>
+
+            <p class="subtitle">该网站用于存放我的作品，感谢您的浏览</p>
+        </section>
+
+        <!-- Works -->
+        <section id="works">
+            <div class="section-header">
+                <h2>Selected Works</h2>
+                <div class="line"></div>
+            </div>
+
+            <div class="project-grid" id="projectGrid">
+                <!-- Cards injected by JS -->
+            </div>
+        </section>
+
+        <!-- Footer note -->
+        <div class="footer-note">
+            <div class="divider"></div>
+            <p>
+                🔧
+                网站持续更新中(〜￣△￣)〜
+            </p>
+        </div>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
