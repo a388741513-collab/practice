@@ -75,7 +75,7 @@
             thumb: 'Auth Flow',
             image:   'image/XFIMG.jpeg',                           // ← 填缩略图路径，如 'images/preview.png'
             protoUrl: 'project/xuanfang/page_2.png',
-            docUrl:   '需求文档/注册登录.md'
+            docUrl:   'project/xuanfang/xian.pdf'
         }
     ];
 
