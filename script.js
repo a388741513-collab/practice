@@ -73,9 +73,19 @@
             tags: ['网页活动', '预热', '活动向'],
             date: '2026 / 06',
             thumb: 'Auth Flow',
-            image:   'image/XFIMG.jpeg',                           // ← 填缩略图路径，如 'images/preview.png'
+            image:   'image/XFIMG.jpeg',
             protoUrl: 'project/xuanfang/page_2.png',
-            docUrl:   'project/xuanfang/xian.pdf'
+            docUrl:   'project/xuanfang/PRD-xuanfangprewarm-V1.2.pdf'
+        },
+        {
+            name: 'project Ptilopsis',
+            desc: '从社区视角出发，针对当前明日方舟缺乏一个较为完整的理智规划工具的情况，所设计的集成资料查询，干员资料导入，理智规划，干员养成规划等功能的第三方工具型产品。',
+            tags: ['社区工具', '效率提升', '功能向'],
+            date: '2026 / 06',
+            thumb: 'New',                                         
+            image:   'image/BAIGUGU.jpeg',                         
+            protoUrl: 'project/project Ptilopsis/page_1.png',                                          
+            docUrl:   'project/xuanfang/xian.pdf'                                           
         }
     ];
 
@@ -116,6 +126,56 @@
     });
 
     cards.forEach(c => grid.appendChild(c));
+
+    /* ===== Contact Modal ===== */
+    const contactOverlay = document.getElementById('contactOverlay');
+    const contactLink = document.querySelector('.nav-links a[href="#contact"]');
+
+    // Contact data — in JS rather than HTML so crawlers can't scrape it
+    const contactData = {
+        email: { icon: '✉', label: '邮箱', value: '2375652664@qq.com' },
+        
+    };
+
+    function renderContactInfo() {
+        const list = document.getElementById('contactInfo');
+        list.innerHTML = Object.values(contactData).map(c =>
+            `<li>
+                <span class="contact-icon">${c.icon}</span>
+                <span>${c.label}：${c.value}</span>
+            </li>`
+        ).join('');
+    }
+    renderContactInfo();
+
+    function openContact(e) {
+        e.preventDefault();
+        contactOverlay.classList.remove('exit');
+        contactOverlay.classList.add('open');
+        contactOverlay.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeContact() {
+        contactOverlay.classList.add('exit');
+        contactOverlay.classList.remove('open');
+        contactOverlay.setAttribute('aria-hidden', 'true');
+        setTimeout(() => contactOverlay.classList.remove('exit'), 250);
+    }
+
+    contactLink.addEventListener('click', openContact);
+
+    // Close: X button
+    contactOverlay.querySelector('.contact-close').addEventListener('click', closeContact);
+
+    // Close: click outside modal (on overlay backdrop)
+    contactOverlay.addEventListener('click', (e) => {
+        if (e.target === contactOverlay) closeContact();
+    });
+
+    // Close: Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && contactOverlay.classList.contains('open')) closeContact();
+    });
 
     /* ===== Card click → button flash ===== */
     grid.addEventListener('click', (e) => {
