@@ -85,7 +85,7 @@
             thumb: 'New',                                         
             image:   'image/BAIGUGU.jpeg',                         
             protoUrl: 'project/project Ptilopsis/page_1.png',                                          
-            docUrl:   'project/xuanfang/xian.pdf'                                           
+            docUrl:   'project/project Ptilopsis/PRD-project Ptilopsis-V1.0.pdf'                                           
         }
     ];
 
